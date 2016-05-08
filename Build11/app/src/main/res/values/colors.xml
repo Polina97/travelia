@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_1.1">#1CCA9D</color>
-    <color name="color_1.2">#A2F6D1</color>
-    <color name="color_2">#1CCA86</color>
-    <color name="color_3">#1CCA67</color>
+    <color name="color_1.2">#a9f2c2</color>
+    <color name="color_2">#1ab176</color>
+
     <color name="color_4">#801cca86</color>
+    <color name="color_5">#aab5ac97</color>
+    <color name="color_6">#2db466</color>
+    <color name="color_7">#000000</color>
     <color name="color_text">#ffffff</color>
 
 </resources>

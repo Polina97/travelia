@@ -18,7 +18,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import admin.build1.R;
 import admin.build1.database.TraveliaCursorLoader;
@@ -172,7 +171,7 @@ public class AttractionsActivity extends AppCompatActivity
     @Override
     public void onSightClick(int id) {
         Intent intent = new Intent(this, AttractionsDetailActivity.class);
-        // передать id
+        intent.putExtra("id",id);
         startActivity(intent);
     }
 }

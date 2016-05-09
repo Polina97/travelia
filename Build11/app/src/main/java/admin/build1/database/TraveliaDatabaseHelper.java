@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import admin.build1.R;
 
-public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
+ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "Travelia2"; // the name of database
-    private static final int DB_VERSION = 1; // the version of the database
+    public static final String DB_NAME = "Travelia2"; // the name of database
+    public static final int DB_VERSION = 1; // the version of the database
 
-    private static volatile TraveliaDatabaseHelper sInstance;
+    public static volatile TraveliaDatabaseHelper sInstance;
 
     public static TraveliaDatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -26,7 +26,7 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
         return sInstance;
     }
 
-    TraveliaDatabaseHelper(Context context) {
+    public TraveliaDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -40,7 +40,7 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
         updateMyDatabase(db, oldVersion, newVersion);
     }
 
-    private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL("CREATE TABLE SIGHTS (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "NAME TEXT, "
@@ -108,7 +108,7 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private static void insertSight(SQLiteDatabase db, String name,
+    public static void insertSight(SQLiteDatabase db, String name,
                                     String historyshort,  String historylong,String contact,
                                     String facts, int resourceId) {
         ContentValues sightsValues = new ContentValues();

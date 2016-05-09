@@ -72,8 +72,6 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
     }
 
     public interface SightsOnClickListener {
-
         void onSightClick(int id);
-
     }
 }

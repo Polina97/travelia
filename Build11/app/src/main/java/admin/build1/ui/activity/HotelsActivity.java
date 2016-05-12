@@ -1,53 +1,77 @@
 package admin.build1.ui.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import admin.build1.R;
-import admin.build1.database.TraveliaCursorLoader;
+import admin.build1.database.TraveliaCursorLoader1;
 import admin.build1.database.TraveliaDatabaseHelper;
-import admin.build1.ui.adapter.SightsAdapter;
+import admin.build1.ui.adapter.HotelsAdapter;
 
-public class AttractionsActivity extends AppCompatActivity
+public class HotelsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LoaderManager.LoaderCallbacks<Cursor>,
-        SightsAdapter.SightsOnClickListener{
+        HotelsAdapter.HotelsOnClickListener {
 
-    private static final int SIGTHS_LOADER_ID = 1;
+    private static final int HOTELS_LOADER_ID = 1;
 
     private RecyclerView mRecycler;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attractions);
+        setContentView(R.layout.activity_hotels);
 
         initDrawer();
 
-        mRecycler = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecycler = (RecyclerView) findViewById(R.id.recycler_view1);
         mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        getSupportLoaderManager().initLoader(SIGTHS_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(HOTELS_LOADER_ID, null, this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void onStarClick(View view) {
+        Toast toast;
         ImageView imageStar;
         /*switch (view.getId()) {
             case R.id.idStar1:
@@ -55,12 +79,9 @@ public class AttractionsActivity extends AppCompatActivity
                 imageStar.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
                 break;
             case R.id.idStar2:
-                imageStar = (ImageView)findViewById(view.getId());
-                imageStar.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
-                break;
-            case R.id.idStar3:
-                imageStar = (ImageView)findViewById(view.getId());
-                imageStar.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+                toast = Toast.makeText(getApplicationContext(),
+                    "Click №5!", Toast.LENGTH_SHORT);
+                toast.show();
                 break;
             default:
                 break;
@@ -92,7 +113,6 @@ public class AttractionsActivity extends AppCompatActivity
         return super.onKeyDown(keyCode, event);
     }
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -100,6 +120,8 @@ public class AttractionsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_attractions) {
+            Intent intent = new Intent(this, AttractionsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_hotels) {
 
@@ -126,12 +148,13 @@ public class AttractionsActivity extends AppCompatActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new TraveliaCursorLoader(this, TraveliaDatabaseHelper.getInstance(this));
+
+        return new TraveliaCursorLoader1(this, TraveliaDatabaseHelper.getInstance(this));
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mRecycler.setAdapter(new SightsAdapter(data, this));
+        mRecycler.setAdapter(new HotelsAdapter(data, this));
     }
 
     @Override
@@ -154,9 +177,42 @@ public class AttractionsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSightClick(int id) {
-        Intent intent = new Intent(this, AttractionsDetailActivity.class);
-        intent.putExtra("id",id);
-        startActivity(intent);
+    public void onHotelsClick(int id) {
+        //Intent intent = new Intent(this, HotelsActivity.class);
+        //intent.putExtra("id",id);
+        //startActivity(intent);
+
+        try {
+            SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
+            SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
+            Cursor cursor = db.query("HOTELS",
+                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID"}, "_id = ?",
+                    new String[]{Integer.toString(id)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                String name = cursor.getString(0);
+                String text = cursor.getString(1);
+                int photoId = cursor.getInt(2);
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.card_hotels,
+                        (ViewGroup)findViewById(R.id.layout));
+                TextView namehotels = (TextView)layout.findViewById(R.id.text_card1);
+                namehotels.setText(name);
+                TextView texthotels = (TextView)layout.findViewById(R.id.text_card);
+                texthotels.setText(text);
+                ImageView imagehotels = (ImageView)layout.findViewById(R.id.image_card);
+                imagehotels.setImageResource(photoId);
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+                builder. setView(layout);;
+                builder.show();
+            }
+            cursor.close();
+            db.close();
+
+        }
+        catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }

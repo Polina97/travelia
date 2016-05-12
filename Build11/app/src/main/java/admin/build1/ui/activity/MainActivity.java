@@ -1,5 +1,6 @@
 package admin.build1.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,20 +12,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
+import android.support.v7.app.AlertDialog;
 
 import admin.build1.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ViewSwitcher.ViewFactory {
 
     private ImageSwitcher mImageSwitcher;
+    int position = 0;
+    private int[] mImageIds = { R.drawable.img, R.drawable.img1,
+            R.drawable.img2, R.drawable.coloja,R.drawable.far, R.drawable.starzam };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mImageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
+        mImageSwitcher.setFactory(this);
+        mImageSwitcher.setImageResource(mImageIds[0]);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,13 +50,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         new Thread(new Runnable() {
-                public void run() {
-                    do{
+            public void run() {
+                do{
 
-                        long endTime = System.currentTimeMillis()
+                    long endTime = System.currentTimeMillis()
                             + 10 * 1000;
 
-                        while (System.currentTimeMillis() < endTime) {
+                    while (System.currentTimeMillis() < endTime) {
                         synchronized (this) {
                             try {
                                 wait(endTime -
@@ -52,35 +64,101 @@ public class MainActivity extends AppCompatActivity
                             } catch (Exception e) {
                             }
                         }
-                            mImageSwitcher.post(new Runnable() {
-                                public void run() {
-                                    mImageSwitcher.showNext();
-                                }
-                            });
+                        mImageSwitcher.post(new Runnable() {
+                            public void run() {
+                                setPositionNext();
+                                mImageSwitcher.setImageResource(mImageIds[position]);
+                            }
+                        });
                     }
 
-                    }while (true);
-                }
+                }while (true);
+            }
         }).start();
 
     }
 
-    public void onClickPrev(View view) {
-        mImageSwitcher.showPrevious();
+    public void onClickIS(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewNext:
+                setPositionNext();
+                mImageSwitcher.setImageResource(mImageIds[position]);
+                break;
+            case R.id.imageViewPrev:
+                setPositionPrev();
+                mImageSwitcher.setImageResource(mImageIds[position]);
+                break;
+
+            default:
+                break;
+        }
     }
-    public void onClickNext(View view) {
-        mImageSwitcher.showNext();
+
+    public void setPositionNext() {
+        position++;
+        if (position > mImageIds.length - 1) {
+            position = 0;
+        }
+    }
+
+    public void setPositionPrev() {
+        position--;
+        if (position < 0) {
+            position = mImageIds.length - 1;
+        }
     }
 
     @Override
+    public View makeView() {
+        ImageView imageView = new ImageView(this);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setLayoutParams(new
+                ImageSwitcher.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        imageView.setBackgroundColor(0xFF000000);
+        return imageView;
+    }
+
+    public void onImageSwitcherClick(View view) {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "onImageSwitcherClick!", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+     @Override
     public void onBackPressed() {
+        // TODO Auto-generated method stub
+        // super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            openQuitDialog();
         }
     }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Выход: Вы уверены?");
+
+        quitDialog.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+    }
+	
     public void onClick(View view) {
         Toast toast;
         switch (view.getId()) {
@@ -88,17 +166,15 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(this,AttractionsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.id2:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №2!", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.hotels:
+                Intent intent1 = new Intent(this,HotelsActivity.class);
+                startActivity(intent1);
                 break;
-            /*case R.id.id3:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №3!", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.sundry:
+                Intent intent2 = new Intent(this,SundryActivity.class);
+                startActivity(intent2);
                 break;
-            case R.id.id4:
+            /*case R.id.id4:
                 toast = Toast.makeText(getApplicationContext(),
                         "Click №4!", Toast.LENGTH_SHORT);
                 toast.show();
@@ -125,17 +201,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_attractions) {
+            Intent intent = new Intent(this,AttractionsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_hotels) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_cafe) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_sundry) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_map) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_favorites) {
+
+        } else if (id == R.id.nav_festival) {
+
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_about) {
 
         }
 

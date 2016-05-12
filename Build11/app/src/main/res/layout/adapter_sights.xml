@@ -8,8 +8,7 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:cardCornerRadius="4dp">
+        android:layout_height="200dp">
 
         <ImageView
             android:id="@+id/image"
@@ -20,12 +19,11 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_margin"
             android:gravity="center"
             android:background="@color/color_5"
             android:layout_gravity="bottom"
-            android:textSize="17sp"
-            android:textColor="@color/color_7"/>
+            android:textColor="@color/color_7"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </android.support.v7.widget.CardView>
 

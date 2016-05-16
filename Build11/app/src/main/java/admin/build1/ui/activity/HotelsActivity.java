@@ -47,11 +47,6 @@ public class HotelsActivity extends AppCompatActivity
     private static final int HOTELS_LOADER_ID = 1;
 
     private RecyclerView mRecycler;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +60,7 @@ public class HotelsActivity extends AppCompatActivity
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         getSupportLoaderManager().initLoader(HOTELS_LOADER_ID, null, this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     public void onStarClick(View view) {

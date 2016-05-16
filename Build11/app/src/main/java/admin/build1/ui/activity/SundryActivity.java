@@ -19,8 +19,8 @@ public class SundryActivity extends AppCompatActivity {
         Toast toast;
         switch (view.getId()) {
             case R.id.taxi:
-                //Intent intent = new Intent(this,AttractionsActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(this,TaxiActivity.class);
+                startActivity(intent);
                 break;
             case R.id.parking:
                 toast = Toast.makeText(getApplicationContext(),

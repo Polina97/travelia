@@ -110,6 +110,33 @@ import admin.build1.R;
             insertHotel(db,"Неман","ул.С.Батория,8\n"+"79-17-00",R.drawable.neman);
             insertHotel(db,"Кронон Парк Отель","урочище Пышки\n"+"8(029)360-00-50",R.drawable.kronon);
 
+            db.execSQL("CREATE TABLE TAXI (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "NAME TEXT, "
+                    + "CONTACTS TEXT,"
+                    + "IMAGE_RESOURCE_ID INTEGER);");
+            insertTaxi(db,"Бертель","Короткий номер: 107\n" +
+                    "Vel: +375 29 3407834 \n" +
+                    "MTS: +375 29 5807858 \n" +
+                    "Life: +375 25 9907899 \n",R.drawable.bertel);
+            insertTaxi(db,"Веста","Короткий номер: 156\n" +
+                    "Vel: +375 29 6621212 \n" +
+                    "MTS: +375 29 7860060 \n" +
+                    "Life: +375 25 9860060  \n",R.drawable.vesta);
+            insertTaxi(db,"Карета","Короткий номер: 163\n" +
+                    "Оператор: +375 15 2720225 \n" +
+                    "Vel: +375 29 6636363 \n" +
+                    "MTS: +375 29 7888063\n" +
+                    "Life: +375 25 9333063 \n",R.drawable.kareta);
+            insertTaxi(db,"Шатле","Короткий номер: 155\n" +
+                    "Оператор: +375 15 2751313 \n" +
+                    "Vel: +375 29 6087000 \n" +
+                    "MTS: +375 29 7888087 \n" +
+                    "Life: +375 25 7333111 \n",R.drawable.shatle);
+            insertTaxi(db,"Евро Плюс","Короткий номер: 183\n" +
+                    "Vel: +375 29 6783388 \n" +
+                    "MTS: +375 29 7783388 \n",R.drawable.evro);
+
+
         }
         if (oldVersion < 2) {
             db.execSQL("ALTER TABLE SIGHTS ADD COLUMN FAVORITE NUMERIC;");
@@ -130,13 +157,22 @@ import admin.build1.R;
         db.insertOrThrow("SIGHTS", null, sightsValues);
     }
      public static void insertHotel (SQLiteDatabase db, String name,
-                                    String contact, int resourceId) {
+                                      String contact, int resourceId) {
          ContentValues sightsValues = new ContentValues();
          sightsValues.put("NAME", name);
          sightsValues.put("CONTACTS", contact);
          sightsValues.put("IMAGE_RESOURCE_ID", resourceId);
 
          db.insertOrThrow("HOTELS", null, sightsValues);
+     }
+     public static void insertTaxi (SQLiteDatabase db, String name,
+                                     String contact, int resourceId) {
+         ContentValues sightsValues = new ContentValues();
+         sightsValues.put("NAME", name);
+         sightsValues.put("CONTACTS", contact);
+         sightsValues.put("IMAGE_RESOURCE_ID", resourceId);
+
+         db.insertOrThrow("TAXI", null, sightsValues);
      }
 
     public void addToFavourite(int id) {
@@ -158,6 +194,10 @@ import admin.build1.R;
     }
      public Cursor getHotelsCursor(){
          return getReadableDatabase().query("HOTELS", null, null, null, null, null, null);
+     }
+
+     public Cursor getTaxiCursor(){
+         return getReadableDatabase().query("TAXI", null, null, null, null, null, null);
      }
 
 }

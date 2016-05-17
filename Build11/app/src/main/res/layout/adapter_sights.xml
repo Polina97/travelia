@@ -23,7 +23,9 @@
             android:background="@color/color_8"
             android:layout_gravity="bottom"
             android:textColor="@color/color_7"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp" />
 
     </android.support.v7.widget.CardView>
 

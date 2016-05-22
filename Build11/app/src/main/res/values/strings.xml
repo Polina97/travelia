@@ -5,4 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_cafe">CafeActivity</string>
+    <string name="title_activity_parks">ParksActivity</string>
+    <string name="title_activity_park">ParkActivity</string>
+    <string name="title_activity_park_detail">ParkDetailActivity</string>
 </resources>

@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/name"
-                android:background="#64aaf9d7"
+                android:background="@color/color_8"
                 android:gravity="center_horizontal"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
@@ -132,7 +132,9 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:id="@+id/map1"
+                    android:layout_weight="1"
+                    android:onClick="onText">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -148,7 +150,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Рядом"
+                        android:text="На карте"
                         android:textSize="15sp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -180,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/textsight"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="@color/color_7"
                  />
             </ScrollView>

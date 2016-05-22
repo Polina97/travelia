@@ -90,7 +90,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:id="@+id/id1"
+                    android:id="@+id/sights"
                     android:onClick="onClick">
 
                     <ImageView
@@ -183,12 +183,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:id="@+id/cafe"
+                    android:orientation="vertical"
+                    android:onClick="onClick">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/imageView7"
                         android:src="@drawable/co"
                         android:layout_weight="1" />
 
@@ -275,6 +276,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:id="@+id/map"
+                    android:onClick="onClick"
                     android:orientation="vertical">
 
                     <ImageView

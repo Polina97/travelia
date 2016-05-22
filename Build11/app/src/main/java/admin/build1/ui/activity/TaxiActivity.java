@@ -1,7 +1,11 @@
 package admin.build1.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.LoaderManager;
@@ -9,6 +13,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,8 +21,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,6 +40,7 @@ import admin.build1.database.TraveliaDatabaseHelper;
 
 import admin.build1.ui.adapter.TaxiAdapter;
 
+
 public class TaxiActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LoaderManager.LoaderCallbacks<Cursor>,
@@ -35,6 +48,7 @@ public class TaxiActivity extends AppCompatActivity
     private static final int TAXI_LOADER_ID = 1;
 
     private RecyclerView mRecycler;
+    private String Contacts_Phone;
 
 
     @Override
@@ -139,7 +153,63 @@ public class TaxiActivity extends AppCompatActivity
 
     @Override
     public void onTaxiClick(int id) {
+        try {
+            SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
+            SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
+            Cursor cursor = db.query("TAXI",
+                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID"}, "_id = ?",
+                    new String[]{Integer.toString(id)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                String name = cursor.getString(0);
+                String text = cursor.getString(1);
+                int photoId = cursor.getInt(2);
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.card_cafe,
+                        (ViewGroup)findViewById(R.id.layout));
+                TextView namehotels = (TextView)layout.findViewById(R.id.textname11);
+                namehotels.setText(name);
+                TextView texthotels = (TextView)layout.findViewById(R.id.text11);
+                texthotels.setText(text);
+                ImageView imagehotels = (ImageView)layout.findViewById(R.id.image11);
+                imagehotels.setImageResource(photoId);
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(this);
+                builder. setView(layout);;
+                builder.show();
+            }
+            cursor.close();
+            db.close();
+
+        }
+        catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
+    public void onClick11(int id) {
+        try {
+            SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
+            SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
+            Cursor cursor = db.query("TAXI",
+                    new String[]{"NUMBER"}, "_id = ?",
+                    new String[]{Integer.toString(id)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                String number = cursor.getString(0);
+
+
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
+                startActivity(intent);
+            }
+            cursor.close();
+            db.close();
+        }
+        catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
 
 }

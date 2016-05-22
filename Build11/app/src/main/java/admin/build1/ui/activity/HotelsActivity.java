@@ -63,23 +63,7 @@ public class HotelsActivity extends AppCompatActivity
 
     }
 
-    public void onStarClick(View view) {
-        Toast toast;
-        ImageView imageStar;
-        /*switch (view.getId()) {
-            case R.id.idStar1:
-                imageStar = (ImageView)findViewById(view.getId());
-                imageStar.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
-                break;
-            case R.id.idStar2:
-                toast = Toast.makeText(getApplicationContext(),
-                    "Click №5!", Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            default:
-                break;
-        }*/
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -171,15 +155,12 @@ public class HotelsActivity extends AppCompatActivity
 
     @Override
     public void onHotelsClick(int id) {
-        //Intent intent = new Intent(this, HotelsActivity.class);
-        //intent.putExtra("id",id);
-        //startActivity(intent);
 
         try {
             SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
             SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query("HOTELS",
-                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID"}, "_id = ?",
+                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID2"}, "_id = ?",
                     new String[]{Integer.toString(id)}, null, null, null);
             if (cursor.moveToFirst()) {
                 String name = cursor.getString(0);

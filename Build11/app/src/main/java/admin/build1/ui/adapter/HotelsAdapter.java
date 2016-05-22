@@ -25,7 +25,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
 
     @Override
     public HotelsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_hotels, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_sights, parent, false);
         return new HotelsViewHolder(view, mListener);
     }
 
@@ -51,8 +51,8 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
         public HotelsViewHolder(View itemView, final HotelsOnClickListener listener) {
             super(itemView);
 
-            mImage = (ImageView) itemView.findViewById(R.id.image1);
-            mText = (TextView) itemView.findViewById(R.id.text1);
+            mImage = (ImageView) itemView.findViewById(R.id.image);
+            mText = (TextView) itemView.findViewById(R.id.text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -32,12 +32,21 @@ public class SundryActivity extends AppCompatActivity {
                         "Click №3!", Toast.LENGTH_SHORT);
                 toast.show();
                 break;
-            case R.id.free:
+            case R.id.theater:
                 toast = Toast.makeText(getApplicationContext(),
                         "Click №4!", Toast.LENGTH_SHORT);
                 toast.show();
                 break;
             case R.id.parks:
+                Intent intent4 = new Intent(this,ParkActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.clubs:
+                toast = Toast.makeText(getApplicationContext(),
+                        "Click №5!", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case R.id.cazino:
                 toast = Toast.makeText(getApplicationContext(),
                         "Click №5!", Toast.LENGTH_SHORT);
                 toast.show();

@@ -2,6 +2,7 @@ package admin.build1.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         Toast toast;
         switch (view.getId()) {
-            case R.id.id1:
+            case R.id.sights:
                 Intent intent = new Intent(this,AttractionsActivity.class);
                 startActivity(intent);
                 break;
@@ -174,17 +175,16 @@ public class MainActivity extends AppCompatActivity
                 Intent intent2 = new Intent(this,SundryActivity.class);
                 startActivity(intent2);
                 break;
-            /*case R.id.id4:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №4!", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.cafe:
+                Intent intent3 = new Intent(this,CafeActivity.class);
+                startActivity(intent3);
                 break;
-            case R.id.id5:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №5!", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.map:
+               // String uri = String.format("geo:%s,%s?z=18", Double.toString(53.678486), Double.toString(23.818513));
+                Intent intent4 = new Intent(Intent.ACTION_VIEW);
+                startActivity(intent4);
                 break;
-            case R.id.id6:
+            /*case R.id.id6:
                 toast = Toast.makeText(getApplicationContext(),
                         "Click №6!", Toast.LENGTH_SHORT);
                 toast.show();

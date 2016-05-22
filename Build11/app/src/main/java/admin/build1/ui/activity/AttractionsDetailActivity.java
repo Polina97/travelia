@@ -1,6 +1,7 @@
 package admin.build1.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +67,7 @@ public class AttractionsDetailActivity extends AppCompatActivity {
             SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
             SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query("SIGHTS",
-                    new String[]{"SHORT", "LONG", "CONTACTS", "FACTS"}, "_id = ?",
+                    new String[]{"SHORT", "LONG", "CONTACTS", "FACTS","LATITUDE","LONGITUDE"}, "_id = ?",
                     new String[]{Integer.toString(id)}, null, null, null);
 
             if (cursor.moveToFirst()) {
@@ -74,6 +75,8 @@ public class AttractionsDetailActivity extends AppCompatActivity {
                 String longtext = cursor.getString(1);
                 String contact = cursor.getString(2);
                 String fact = cursor.getString(3);
+                double lat = cursor.getDouble(4);
+                double lng = cursor.getDouble(5);
                 TextView textsight1 = (TextView) findViewById(R.id.textsight);
                 switch (view.getId()) {
                     case R.id.button3:
@@ -87,6 +90,11 @@ public class AttractionsDetailActivity extends AppCompatActivity {
                         break;
                     case R.id.fact:
                         textsight1.setText(fact);
+                        break;
+                    case R.id.map1:
+                        String uri = String.format("geo:%s,%s?z=18", Double.toString(lat), Double.toString(lng));
+                        Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        startActivity(intent4);
                         break;
                     default:
                         break;

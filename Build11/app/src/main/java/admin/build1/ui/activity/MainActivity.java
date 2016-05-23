@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity
 
     private ImageSwitcher mImageSwitcher;
     int position = 0;
-    private int[] mImageIds = { R.drawable.img, R.drawable.img1,
-            R.drawable.img2, R.drawable.coloja,R.drawable.far, R.drawable.starzam };
+    private int[] mImageIds = { R.drawable.luter_1,
+            R.drawable.img2, R.drawable.coloja_1,R.drawable.far_1, R.drawable.starzam };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,15 +180,14 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent3);
                 break;
             case R.id.map:
-               // String uri = String.format("geo:%s,%s?z=18", Double.toString(53.678486), Double.toString(23.818513));
-                Intent intent4 = new Intent(Intent.ACTION_VIEW);
+                Intent intent4 = new Intent(this,MapsActivity.class);
                 startActivity(intent4);
                 break;
-            /*case R.id.id6:
+            case R.id.favorite:
                 toast = Toast.makeText(getApplicationContext(),
                         "Click №6!", Toast.LENGTH_SHORT);
                 toast.show();
-                break;*/
+                break;
 
             default:
                 break;

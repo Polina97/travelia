@@ -153,7 +153,7 @@ public class CafeActivity extends AppCompatActivity
                 String text = cursor.getString(1);
                 int photoId = cursor.getInt(2);
                 LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.card_hotels,
+                View layout = inflater.inflate(R.layout.card_cafe,
                         (ViewGroup)findViewById(R.id.layout));
                 TextView namehotels = (TextView)layout.findViewById(R.id.text_card1);
                 namehotels.setText(name);

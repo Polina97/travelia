@@ -97,14 +97,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/imageView4"
-                        android:src="@drawable/ico1"
+                        android:src="@drawable/palace"
                         android:layout_weight="1" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Достопримечательности"
+                        android:text="Объекты"
                         android:id="@+id/textView2"
                         android:gravity="center_horizontal" />
                 </LinearLayout>
@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/imageView5"
-                        android:src="@drawable/ico2"
+                        android:src="@drawable/hotel"
                         android:layout_weight="1" />
 
                     <TextView
@@ -190,7 +190,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/co"
+                        android:src="@drawable/tea"
                         android:layout_weight="1" />
 
                     <TextView
@@ -221,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/imageView8"
-                        android:src="@drawable/ico5"
+                        android:src="@drawable/light1"
                         android:layout_weight="1" />
 
                     <TextView
@@ -284,7 +284,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/imageView9"
-                        android:src="@drawable/car"
+                        android:src="@drawable/map"
                         android:layout_weight="1" />
 
                     <TextView
@@ -307,13 +307,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:id="@+id/favorite"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/imageView10"
-                        android:src="@drawable/ico6"
+                        android:src="@drawable/star1"
                         android:layout_weight="1" />
 
                     <TextView

@@ -48,7 +48,6 @@ public class TaxiActivity extends AppCompatActivity
     private static final int TAXI_LOADER_ID = 1;
 
     private RecyclerView mRecycler;
-    private String Contacts_Phone;
 
 
     @Override
@@ -166,11 +165,11 @@ public class TaxiActivity extends AppCompatActivity
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.card_cafe,
                         (ViewGroup)findViewById(R.id.layout));
-                TextView namehotels = (TextView)layout.findViewById(R.id.textname11);
+                TextView namehotels = (TextView)layout.findViewById(R.id.text_card1);
                 namehotels.setText(name);
-                TextView texthotels = (TextView)layout.findViewById(R.id.text11);
+                TextView texthotels = (TextView)layout.findViewById(R.id.text_card);
                 texthotels.setText(text);
-                ImageView imagehotels = (ImageView)layout.findViewById(R.id.image11);
+                ImageView imagehotels = (ImageView)layout.findViewById(R.id.image_card);
                 imagehotels.setImageResource(photoId);
 
                 AlertDialog.Builder builder= new AlertDialog.Builder(this);

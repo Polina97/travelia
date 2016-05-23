@@ -9,4 +9,8 @@
     <string name="title_activity_parks">ParksActivity</string>
     <string name="title_activity_park">ParkActivity</string>
     <string name="title_activity_park_detail">ParkDetailActivity</string>
+    <string name="title_activity_theater">TheaterActivity</string>
+    <string name="title_activity_cazino">CazinoActivity</string>
+    <string name="title_activity_cinema">CinemaActivity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

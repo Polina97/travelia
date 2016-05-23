@@ -33,13 +33,16 @@ public class SundryActivity extends AppCompatActivity {
                 toast.show();
                 break;
             case R.id.theater:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №4!", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent3 = new Intent(this,TheaterActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.cinema:
+                Intent intent4 = new Intent(this,CinemaActivity.class);
+                startActivity(intent4);
                 break;
             case R.id.parks:
-                Intent intent4 = new Intent(this,ParkActivity.class);
-                startActivity(intent4);
+                Intent intent5 = new Intent(this,ParkActivity.class);
+                startActivity(intent5);
                 break;
             case R.id.clubs:
                 toast = Toast.makeText(getApplicationContext(),
@@ -47,9 +50,8 @@ public class SundryActivity extends AppCompatActivity {
                 toast.show();
                 break;
             case R.id.cazino:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №5!", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent7 = new Intent(this,CazinoActivity.class);
+                startActivity(intent7);
                 break;
 
             default:

@@ -1,16 +1,21 @@
 package admin.build1.ui.adapter;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import admin.build1.R;
+import admin.build1.database.TraveliaDatabaseHelper;
 
 /**
  * Created by User on 08.05.2016.
@@ -19,9 +24,11 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
 
     private final Cursor mCursor;
     private final SightsOnClickListener mListener;
+    private final Context mContext;
 
-    public SightsAdapter(Cursor cursor, SightsOnClickListener listener) {
+    public SightsAdapter(Cursor cursor, Context context, SightsOnClickListener listener) {
         mCursor = cursor;
+        mContext = context;
         mListener = listener;
     }
 
@@ -36,8 +43,8 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
         mCursor.moveToPosition(position);
         String text = mCursor.getString(mCursor.getColumnIndex("NAME"));
         int imageResId = mCursor.getInt(mCursor.getColumnIndex("IMAGE_RESOURCE_ID"));
-
-        holder.populateView(imageResId, text);
+        boolean isFavourite = mCursor.getInt(mCursor.getColumnIndex("FAVORITE")) == 1;
+        holder.populateView(imageResId, text, isFavourite);
     }
 
     @Override
@@ -49,6 +56,7 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
 
         ImageView mImage;
         TextView mText;
+        CheckBox Favourite;
 
         public SightsViewHolder(View itemView, final SightsOnClickListener listener) {
             super(itemView);
@@ -56,18 +64,31 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
             mImage = (ImageView) itemView.findViewById(R.id.image);
             mText = (TextView) itemView.findViewById(R.id.text);
 
+            Favourite = (CheckBox)itemView.findViewById(R.id.favourite);
+            Favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    TraveliaDatabaseHelper.getInstance(mContext).changeFavourite(getId(), isChecked);
+                }
+            });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCursor.moveToPosition(getAdapterPosition());
-                    listener.onSightClick(mCursor.getInt(mCursor.getColumnIndex("_id")));
+                    listener.onSightClick(getId());
                 }
             });
         }
 
-        public void populateView(int imageResId, String text) {
+        private int getId() {
+            mCursor.moveToPosition(getAdapterPosition());
+            return mCursor.getInt(mCursor.getColumnIndex("_id"));
+        }
+
+        public void populateView(int imageResId, String text, boolean isFavourite) {
             mImage.setBackgroundResource(imageResId);
             mText.setText(text);
+            Favourite.setChecked(isFavourite);
         }
     }
 

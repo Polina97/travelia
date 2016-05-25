@@ -85,21 +85,19 @@ public class CinemaActivity extends AppCompatActivity
             // Handle navigation view item clicks here.
             int id = item.getItemId();
 
-            if (id == R.id.nav_attractions) {
-
-            } else if (id == R.id.nav_hotels) {
-
-            } else if (id == R.id.nav_cafe) {
-
-            } else if (id == R.id.nav_sundry) {
+            if (id == R.id.nav_main) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
             } else if (id == R.id.nav_map) {
+                Intent intent = new Intent(this, MapsActivity.class);
+                startActivity(intent);
 
             } else if (id == R.id.nav_favorites) {
+                Intent intent = new Intent(this, FavoriteActivity.class);
+                startActivity(intent);
 
             } else if (id == R.id.nav_festival) {
-
-            } else if (id == R.id.nav_settings) {
 
             } else if (id == R.id.nav_about) {
 
@@ -141,27 +139,13 @@ public class CinemaActivity extends AppCompatActivity
 
     @Override
     public void onMapp1(int id) {
-        try {
-            SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
-            SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
-            Cursor cursor = db.query("CINEMA",
-                    new String[]{"LATITUDE","LONGITUDE"}, "_id = ?",
-                    new String[]{Integer.toString(id)}, null, null, null);
-            if (cursor.moveToFirst()) {
-                String lat = cursor.getString(0);
-                String lng = cursor.getString(1);
-                String uri = String.format("geo:%s,%s?z=18", lat, lng);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(intent);
-            }
-            cursor.close();
-            db.close();
-
-        }
-        catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        Bundle b = new Bundle();
+        String fullname = "CINEMA";
+        b.putString("name", fullname);
+        b.putInt("id",id);
+        Intent intent = new Intent(this,Maps2Activity.class );
+        intent.putExtras(b);
+        startActivity(intent);
 
     }
 

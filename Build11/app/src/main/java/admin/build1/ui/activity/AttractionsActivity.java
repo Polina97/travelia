@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import admin.build1.R;
 import admin.build1.database.TraveliaCursorLoader;
@@ -32,6 +33,7 @@ public class AttractionsActivity extends AppCompatActivity
     private static final int SIGTHS_LOADER_ID = 1;
 
     private RecyclerView mRecycler;
+    private ProgressBar mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class AttractionsActivity extends AppCompatActivity
         setContentView(R.layout.activity_attractions);
 
         initDrawer();
+
+        mProgress = (ProgressBar)findViewById(android.R.id.progress);
+        mProgress.setVisibility(View.VISIBLE);
 
         mRecycler = (RecyclerView) findViewById(R.id.recycler_view);
         mRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -80,13 +85,7 @@ public class AttractionsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_attractions) {
-
-        } else if (id == R.id.nav_hotels) {
-
-        } else if (id == R.id.nav_cafe) {
-
-        } else if (id == R.id.nav_sundry) {
+        if (id == R.id.nav_main) {
 
         } else if (id == R.id.nav_map) {
 
@@ -94,9 +93,7 @@ public class AttractionsActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_festival) {
 
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_about) {
+        }  else if (id == R.id.nav_about) {
 
         }
 
@@ -112,7 +109,8 @@ public class AttractionsActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mRecycler.setAdapter(new SightsAdapter(data, this));
+        mRecycler.setAdapter(new SightsAdapter(data, this, this));
+        mProgress.setVisibility(View.GONE);
     }
 
     @Override

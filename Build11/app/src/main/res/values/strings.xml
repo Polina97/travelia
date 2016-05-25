@@ -13,4 +13,6 @@
     <string name="title_activity_cazino">CazinoActivity</string>
     <string name="title_activity_cinema">CinemaActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_fun">FunActivity</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

@@ -41,7 +41,7 @@ import admin.build1.database.TraveliaDatabaseHelper;
 import admin.build1.ui.adapter.TaxiAdapter;
 
 
-public class TaxiActivity extends AppCompatActivity
+public class TaxiActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LoaderManager.LoaderCallbacks<Cursor>,
         TaxiAdapter.TaxiOnClickListener {
@@ -53,7 +53,6 @@ public class TaxiActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_taxi);
 
         initDrawer();
 
@@ -63,6 +62,11 @@ public class TaxiActivity extends AppCompatActivity
         mRecycler.setLayoutManager(layoutManager);
 
         getSupportLoaderManager().initLoader(TAXI_LOADER_ID, null, this);
+    }
+
+    @Override
+    int getContentView() {
+        return R.layout.activity_taxi;
     }
 
     @Override
@@ -96,21 +100,19 @@ public class TaxiActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_attractions) {
-
-        } else if (id == R.id.nav_hotels) {
-
-        } else if (id == R.id.nav_cafe) {
-
-        } else if (id == R.id.nav_sundry) {
+        if (id == R.id.nav_main) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_favorites) {
+            Intent intent = new Intent(this, FavoriteActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_festival) {
-
-        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
 
@@ -137,12 +139,9 @@ public class TaxiActivity extends AppCompatActivity
     }
 
     private void initDrawer() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -163,6 +162,7 @@ public class TaxiActivity extends AppCompatActivity
                 String text = cursor.getString(1);
                 int photoId = cursor.getInt(2);
                 LayoutInflater inflater = getLayoutInflater();
+
                 View layout = inflater.inflate(R.layout.card_cafe,
                         (ViewGroup)findViewById(R.id.layout));
                 TextView namehotels = (TextView)layout.findViewById(R.id.text_card1);
@@ -187,7 +187,8 @@ public class TaxiActivity extends AppCompatActivity
 
     }
 
-    public void onClick11(int id) {
+    @Override
+    public void onTaxiCall(int id) {
         try {
             SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
             SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
@@ -196,9 +197,7 @@ public class TaxiActivity extends AppCompatActivity
                     new String[]{Integer.toString(id)}, null, null, null);
             if (cursor.moveToFirst()) {
                 String number = cursor.getString(0);
-
-
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
                 startActivity(intent);
             }
             cursor.close();
@@ -210,5 +209,6 @@ public class TaxiActivity extends AppCompatActivity
         }
 
     }
+
 
 }

@@ -25,8 +25,11 @@ import android.widget.Toast;
 import admin.build1.R;
 import admin.build1.database.TraveliaDatabaseHelper;
 
-public class ParkDetailActivity extends AppCompatActivity
+public class
+ParkDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,9 @@ public class ParkDetailActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         try {
-
             Intent intent = getIntent();
             int id = intent.getIntExtra("id", 1);
+
             SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
             SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query("PARKS",
@@ -77,29 +80,15 @@ public class ParkDetailActivity extends AppCompatActivity
         }
     }
     public void onMap (View view) {
-
-        try {
-            Intent intent = getIntent();
-            int id = intent.getIntExtra("id", 1);
-            SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
-            SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
-            Cursor cursor = db.query("PARKS",
-                    new String[]{"LATITUDE", "LONGITUDE"}, "_id = ?",
-                    new String[]{Integer.toString(id)}, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                String lat = cursor.getString(0);
-                String lng = cursor.getString(1);
-                String uri = String.format("geo:%s,%s?z=16", lat, lng);
-                Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(intent4);
-            }
-            cursor.close();
-            db.close();
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        Intent intent2 = getIntent();
+        int id = intent2.getIntExtra("id", 1);
+        Bundle b = new Bundle();
+        String fullname = "PARKS";
+        b.putString("name", fullname);
+        b.putInt("id",id);
+        Intent intent3 = new Intent(this,Maps2Activity.class );
+        intent3.putExtras(b);
+        startActivity(intent3);
     }
 
 
@@ -133,25 +122,19 @@ public class ParkDetailActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_attractions) {
-            Intent intent = new Intent(this, AttractionsActivity.class);
+        if (id == R.id.nav_main) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_hotels) {
-            Intent intent1 = new Intent(this, HotelsActivity.class);
-            startActivity(intent1);
-        } else if (id == R.id.nav_cafe) {
-
-        } else if (id == R.id.nav_sundry) {
-            Intent intent1 = new Intent(this, SundryActivity.class);
-            startActivity(intent1);
         } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_favorites) {
+            Intent intent = new Intent(this, FavoriteActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_festival) {
-
-        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
 

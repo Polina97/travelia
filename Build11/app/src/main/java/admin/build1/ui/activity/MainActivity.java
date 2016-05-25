@@ -21,7 +21,7 @@ import android.support.v7.app.AlertDialog;
 
 import admin.build1.R;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, ViewSwitcher.ViewFactory {
 
     private ImageSwitcher mImageSwitcher;
@@ -32,18 +32,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
 
         mImageSwitcher = (ImageSwitcher)findViewById(R.id.imageSwitcher);
         mImageSwitcher.setFactory(this);
         mImageSwitcher.setImageResource(mImageIds[0]);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -77,6 +74,11 @@ public class MainActivity extends AppCompatActivity
             }
         }).start();
 
+    }
+
+    @Override
+    int getContentView() {
+        return R.layout.activity_main;
     }
 
     public void onClickIS(View v) {
@@ -184,9 +186,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent4);
                 break;
             case R.id.favorite:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №6!", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent5 = new Intent(this,FavoriteActivity.class);
+                startActivity(intent5);
                 break;
 
             default:
@@ -200,22 +201,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_attractions) {
-            Intent intent = new Intent(this,AttractionsActivity.class);
+        if (id == R.id.nav_main) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_hotels) {
-
-        } else if (id == R.id.nav_cafe) {
-
-        } else if (id == R.id.nav_sundry) {
 
         } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_favorites) {
+            Intent intent = new Intent(this, FavoriteActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_festival) {
-
-        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
 

@@ -45,9 +45,8 @@ public class SundryActivity extends AppCompatActivity {
                 startActivity(intent5);
                 break;
             case R.id.clubs:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №5!", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent6 = new Intent(this,FunActivity.class);
+                startActivity(intent6);
                 break;
             case R.id.cazino:
                 Intent intent7 = new Intent(this,CazinoActivity.class);

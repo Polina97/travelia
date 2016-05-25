@@ -2,28 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_attractions"
 
-            android:title="Достопримечательности" />
         <item
-            android:id="@+id/nav_hotels"
+            android:id="@+id/nav_main"
 
-            android:title="Гостиницы" />
-        <item
-            android:id="@+id/nav_cafe"
-            android:title="Кафе" />
-        <item
-            android:id="@+id/nav_sundry"
-
-            android:title="Разное" />
+            android:title="На гланую" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/car"
             android:title="Карта" />
         <item
             android:id="@+id/nav_favorites"
-
+            android:icon="@drawable/star1"
             android:title="Избранное" />
         <item
             android:id="@+id/nav_festival"
@@ -33,10 +22,6 @@
 
     <item android:title="">
         <menu>
-            <item
-                android:id="@+id/nav_settings"
-
-                android:title="Настройки" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_send"

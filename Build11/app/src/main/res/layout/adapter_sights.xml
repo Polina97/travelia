@@ -27,6 +27,13 @@
             android:paddingLeft="2dp"
             android:paddingRight="2dp" />
 
+        <CheckBox
+            android:id="@+id/favourite"
+            android:theme="@style/MyCheckBox"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp" />
+
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

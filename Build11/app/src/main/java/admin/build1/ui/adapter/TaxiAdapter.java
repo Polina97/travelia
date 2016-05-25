@@ -6,8 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.internal.overlay.zzo;
+
 import admin.build1.R;
 import admin.build1.database.TraveliaDatabaseHelper;
 
@@ -51,6 +55,7 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.TaxiViewHolder
         TextView mName;
         TextView mText;
 
+
         public TaxiViewHolder(View itemView, final TaxiOnClickListener listener) {
             super(itemView);
 
@@ -58,13 +63,24 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.TaxiViewHolder
             mName = (TextView) itemView.findViewById(R.id.taxiname);
             mText=(TextView)itemView.findViewById(R.id.taxitext);
 
+            ((Button)itemView.findViewById(R.id.call3)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onTaxiCall(getId());
+                }
+            });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCursor.moveToPosition(getAdapterPosition());
-                    listener.onTaxiClick(mCursor.getInt(mCursor.getColumnIndex("_id")));
+                    listener.onTaxiClick(getId());
                 }
             });
+        }
+
+        private int getId() {
+            mCursor.moveToPosition(getAdapterPosition());
+            return mCursor.getInt(mCursor.getColumnIndex("_id"));
         }
 
         public void populateView(int imageResId, String name, String text) {
@@ -76,6 +92,8 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.TaxiViewHolder
     }
     public interface TaxiOnClickListener {
         void onTaxiClick(int id);
+
+        void onTaxiCall(int id);
     }
 
     public void onClick1 (View view)

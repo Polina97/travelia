@@ -91,25 +91,19 @@ public class CafeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_attractions) {
-            Intent intent = new Intent(this, AttractionsActivity.class);
+        if (id == R.id.nav_main) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_hotels) {
-            Intent intent1 = new Intent(this, HotelsActivity.class);
-            startActivity(intent1);
-        } else if (id == R.id.nav_cafe) {
-
-        } else if (id == R.id.nav_sundry) {
-            Intent intent1 = new Intent(this, SundryActivity.class);
-            startActivity(intent1);
         } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_favorites) {
+            Intent intent = new Intent(this, FavoriteActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_festival) {
-
-        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
 

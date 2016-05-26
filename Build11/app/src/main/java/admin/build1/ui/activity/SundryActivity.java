@@ -23,9 +23,12 @@ public class SundryActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.parking:
-                toast = Toast.makeText(getApplicationContext(),
-                        "Click №2!", Toast.LENGTH_SHORT);
-                toast.show();
+                Bundle b = new Bundle();
+                String fullname = "PARKING";
+                b.putString("name", fullname);
+                Intent intent1 = new Intent(this,MapsActivity.class );
+                intent1.putExtras(b);
+                startActivity(intent1);
                 break;
             case R.id.fest:
                 toast = Toast.makeText(getApplicationContext(),

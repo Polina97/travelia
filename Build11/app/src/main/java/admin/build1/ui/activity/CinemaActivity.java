@@ -126,6 +126,7 @@ public class CinemaActivity extends AppCompatActivity
     private void initDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -146,7 +147,5 @@ public class CinemaActivity extends AppCompatActivity
         Intent intent = new Intent(this,Maps2Activity.class );
         intent.putExtras(b);
         startActivity(intent);
-
     }
-
 }

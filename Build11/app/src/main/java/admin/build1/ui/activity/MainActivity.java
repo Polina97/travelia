@@ -166,7 +166,11 @@ public class MainActivity extends BaseActivity
         Toast toast;
         switch (view.getId()) {
             case R.id.sights:
+                Bundle b = new Bundle();
+                boolean f = false;
+                b.putBoolean("favorite", f);
                 Intent intent = new Intent(this,AttractionsActivity.class);
+                intent.putExtras(b);
                 startActivity(intent);
                 break;
             case R.id.hotels:
@@ -182,7 +186,11 @@ public class MainActivity extends BaseActivity
                 startActivity(intent3);
                 break;
             case R.id.map:
-                Intent intent4 = new Intent(this,MapsActivity.class);
+                Bundle b1 = new Bundle();
+                String fullname = "SIGHTS";
+                b1.putString("name", fullname);
+                Intent intent4 = new Intent(this,MapsActivity.class );
+                intent4.putExtras(b1);
                 startActivity(intent4);
                 break;
             case R.id.favorite:

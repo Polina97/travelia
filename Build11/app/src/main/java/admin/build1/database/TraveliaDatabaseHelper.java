@@ -246,10 +246,15 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
                     + "CONTACTS TEXT,"
                     + "IMAGE_RESOURCE_ID INTEGER,"
                     + "IMAGE_RESOURCE_ID2 INTEGER);");
-            insertHotel (db,"Семашко","ул.Антонова,10\n"+"75-02-99",R.drawable.semashco,R.drawable.semashco_2);
-            insertHotel(db,"Неман","ул.С.Батория,8\n"+"+375 44 7918179",R.drawable.neman, R.drawable.neman_2);
-            insertHotel(db,"Кронон Парк Отель","урочище Пышки\n"+"8(029)360-00-50",R.drawable.kronon, R.drawable.kronon_2);
-            insertHotel (db,"Беларусь","ул.Калиновского,1\n"+"74-07-80",R.drawable.belarus1, R.drawable.belarus_21);
+            insertHotel (db,"Семашко","ул. Антонова,10\n"+"75-02-99\nhttp://hotel-semashko.ru ",R.drawable.semashco,R.drawable.semashko_1);
+            insertHotel(db,"Неман","ул. С. Батория,8\n"+"+375 44 7918179\nhttp://www.hotel-neman.by",R.drawable.neman, R.drawable.neman_2);
+            insertHotel(db,"Кронон Парк Отель","урочище Пышки\nhttp://kronon.by/ru"+"8(029)360-00-50",R.drawable.kronon, R.drawable.kronon_1);
+            insertHotel (db,"Беларусь","ул. Калиновского,1\n"+"74-07-80",R.drawable.belarus, R.drawable.belarus_2);
+            insertHotel (db,"Турист","пр-т Я. Купалы ,63\n"+"56-99-48\nhttp://tourist.grodno.by",R.drawable.turist_1, R.drawable.turist_2);
+            insertHotel (db,"Славия","ул. Молодёжная,1\n"+"77-35-35\nhttp://www.hotel-slavia.by",R.drawable.slavia_1, R.drawable.slavia_2);
+            insertHotel (db,"Омега","ул. Василька,40\n"+"72-08-00",R.drawable.omega, R.drawable.omega_2);
+            insertHotel (db,"Спорт","ул. Коммунальная,3\n"+"72-38-49",R.drawable.sport, R.drawable.sport_2);
+            insertHotel (db,"Хостел “Hello Grodno”","ул. Городничанская,30\n"+"+375(29) 932-97-90",R.drawable.hostel, R.drawable.hostel_2);
 
 
 
@@ -264,12 +269,12 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
                     "Короткий номер: 107\n" +
                     "Vel: +375 29 3407834 \n" +
                     "MTS: +375 29 5807858 \n" +
-                    "Life: +375 25 9907899 \n",R.drawable.bertel1);
+                    "Life: +375 25 9907899 \n",R.drawable.bertel);
             insertTaxi(db,"Веста","+375297860060","Короткий номер: 156\n",
                     "Короткий номер: 156\n" +
                     "Vel: +375 29 6621212 \n" +
                     "MTS: +375 29 7860060 \n" +
-                    "Life: +375 25 9860060  \n",R.drawable.vesta1);
+                    "Life: +375 25 9860060  \n",R.drawable.vesta);
             insertTaxi(db,"Карета","+375297888063","Короткий номер: 163\n",
                     "Короткий номер: 163\n" +
                     "Оператор: +375 15 2720225 \n" +
@@ -281,7 +286,7 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
                     "Оператор: +375 15 2751313 \n" +
                     "Vel: +375 29 6087000 \n" +
                     "MTS: +375 29 7888087 \n" +
-                    "Life: +375 25 7333111 \n",R.drawable.shatle1);
+                    "Life: +375 25 7333111 \n",R.drawable.shatle);
             insertTaxi(db,"Евро Плюс","+375297783388","Короткий номер: 183\n",
                     "Короткий номер: 183\n" +
                     "Vel: +375 29 6783388 \n" +
@@ -294,12 +299,89 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
                     + "CONTACTS TEXT,"
                     + "IMAGE_RESOURCE_ID INTEGER,"
                     + "IMAGE_RESOURCE_ID2 INTEGER);");
-            insertCafe(db,"Карчма ","ул.Советская,31\nПн–вс: 10:00–00:00\n(Без выходных)",R.drawable.karchma_1,R.drawable.karchma_1);
-            insertCafe(db,"Кофемания","ул.Советская,31\nПн–вс: 09:00–00:00\n(Без выходных)",R.drawable.manija_1, R.drawable.manija_1);
-            insertCafe(db,"Ретро Пицца","ул.Советская,31\nПн–пт: 12:00–01:00\nСб, вс: 12:00–02:00\n(Без выходных)",R.drawable.retro,R.drawable.retro);
-            insertCafe(db,"Семафор","ул.Советская,23\nПн–чт: 12:00–00:00\nПт, сб: 12:00–01:00\nВс: 12:00–00:00\n(Без выходных)",R.drawable.semafor,R.drawable.semafor);
-            insertCafe(db,"Раскоша 1975","ул.Советская,7\nПн–вс: 09:00–00:00\n(Без выходных)",R.drawable.raskosha,R.drawable.raskosha);
-
+            insertCafe(db, "Карчма ", "ул. Советская,31\nПн–вс: 10:00–00:00\n(Без выходных)", R.drawable.karchma, R.drawable.karchma_2);
+            insertCafe(db, "Кофемания", "ул. Советская,31\nПн–вс: 09:00–00:00\n(Без выходных)", R.drawable.kofemania, R.drawable.kofemania_2);
+            insertCafe(db, "Ретро Пицца", "ул. Советская,31\nПн–пт: 12:00–01:00\nСб, вс: 12:00–02:00\n(Без выходных)", R.drawable.retro, R.drawable.retro_2);
+            insertCafe(db, "Семафор", "ул. Советская,23\nПн–чт: 12:00–00:00\nПт, сб: 12:00–01:00\nВс: 12:00–00:00\n(Без выходных)", R.drawable.semafor, R.drawable.semafor);
+            insertCafe(db, "Раскоша 1975", "ул. Советская,7\nПн–вс: 09:00–00:00\n(Без выходных)", R.drawable.raskosha, R.drawable.raskosha_2);
+            insertCafe(db, "Палитра", "ул. Молодёжная,1\nПн–вс: 7:30-02:00\n(Без выходных)", R.drawable.palitra, R.drawable.palitra_2);
+            insertCafe(db, "Магнолия", "ул. Мостовая,31\nПн–чт: 12:00–00:00\n" +
+                    "Пт, сб: 12:00–02:00\n" +
+                    "Вс: 12:00–00:00\n(Без выходных)", R.drawable.magnolia, R.drawable.nophoto);
+            insertCafe(db, "City bar", "ул. Тельмана,4\nПн–ср: 12:00–01:00\n" + "Чт–сб: 12:00–04:00\n" + "Вс: 12:00–01:00\n(Без выходных)", R.drawable.nophoto, R.drawable.city_2);
+            insertCafe(db, "На Телеграфной", "ул. Телеграфная,12\nПн - вс: 18:00 до 00:00\n(Без выходных)", R.drawable.telegraf, R.drawable.nophoto);
+            insertCafe(db, "Pub 32", "ул. Социалистическая,32\nПн–чт: 13:00–02:00\n" +
+                    "Пт, сб: 13:00–04:00\n" +
+                    "Вс: 13:00–02:00\n(Без выходных)", R.drawable.pab32, R.drawable.pab32_2);
+            insertCafe(db, "Мишутка", "ул. Тимирязева,11\nПн–вс: 11:00–19:00\n(Без выходных)", R.drawable.pelikan_mishutka, R.drawable.mishutka_2);
+            insertCafe(db, "Пеликан", "ул. Тимирязева,11\nПн–вс: 12:00–02:00\n(Без выходных)", R.drawable.pelikan_mishutka, R.drawable.pelikan_2);
+            insertCafe(db, "Чарли", "ул. Социалистическая,4\nПн-вс: 18:00-06:00\n(Без выходных)", R.drawable.nophoto, R.drawable.charli);
+            insertCafe(db, "Городница", "ул. Дзержинского,7\nПн–пт: 7:30–22:00\n" +
+                    "Сб-вс: 11:00-22:00\n" +
+                    "Перерыв 16:00-17:00\n(Без выходных)", R.drawable.nophoto, R.drawable.gorodnica_2);
+            insertCafe(db, "Салодки пачастунак", "ул. Ожешко,253\nПн-вс: 10:00-22:00\n(Без выходных)", R.drawable.pachastunak, R.drawable.pachastunak_2);
+            insertCafe(db, "Кофе Саунд", "ул. Ожешко,35а\nПн–вс: 08:00–22:00\n(Без выходных)", R.drawable.kofesaund, R.drawable.kofesaund_2);
+            insertCafe(db, "Веранда", "ул. Подольная,37\nПн–вс: 12:00–00:00\n(Без выходных)", R.drawable.veranda, R.drawable.veranda_2);
+            insertCafe(db, "H20", "ул. Студенческая,2\nПн–чт: 09:00–02:00\n" +
+                    "Пт: 09:00–05:00 Сб-вс:12:00-05:00\n(Без выходных)", R.drawable.h2o, R.drawable.nophoto);
+            insertCafe(db, "Колобки", "ул. Телеграфная,12\nпн - вс: 18:00 до 00:00\n(Без выходных)", R.drawable.kolobki, R.drawable.nophoto);
+            insertCafe(db, "Пивной ресторан", "ул. Стефана Батория,8\nПн-Чт,Вс 12:00-24:00\nПт, Сб – с 12:00 до 02:00\n(Без выходных)", R.drawable.neman1, R.drawable.nophoto);
+            insertCafe(db, "Ресторан Неман", "ул. Стефана Батория,8\nПн-Чт,Вс 12:00-24:00\nПт, Сб – с 12:00 до 02:00\n(Без выходных)", R.drawable.neman2, R.drawable.nophoto);
+            insertCafe(db, "Хани-Кабани", "БЛК,50\nПн–чт: 11:00–00:00\n" +
+                    "Пт,Сб: 11:00–02:00\n" +
+                    "Вс: 12:00–00:00\n(Без выходных)", R.drawable.han, R.drawable.han_2);
+            insertCafe(db, "Большой буфет", "Советская ул. 18, Гродно\nПн-Вс: 12.00-24.00 ", R.drawable.bufet, R.drawable.bufet_2);
+            insertCafe(db, "Каравай", "ул. Пушкина,27\nПн–вс: 12:00–16:00\n 18:00–23:00\n(Без выходных)", R.drawable.karavay, R.drawable.nophoto);
+            insertCafe(db, "Чебуречная", "ул. Ожешко,1\n Пн-чт.:10:00-20:30\n Пт,Сб: 10:00-02:00\n" +
+                    "Вс: 10:00-20:30\n(Без выходных)", R.drawable.cheburek, R.drawable.cheburek_2);
+            insertCafe(db, "Романтика", "ул. Горького,71\nПн-вс.: 12:00-02:00\n(Без выходных)", R.drawable.romantika, R.drawable.romantika_2);
+            insertCafe(db, "Star Light", "ул. Замковая,11\nПн–пт: 09:00–23:00\n" +
+                    "Сб,Вс: 09:00–00:00\n(Без выходных)", R.drawable.starlight, R.drawable.starlight_2);
+            insertCafe(db, "Кофейняя", "ул. Советская,5\nПн–вс: 12:00–00:00\n(Без выходных)", R.drawable.nophoto, R.drawable.kofeina_2);
+            insertCafe(db, "Батория", "ул.Стефана Батория 10\nПн-пт 8:00-21:00\n Cб-вс 9:00-21:00\n(Без выходных)", R.drawable.batoria, R.drawable.batoria_2);
+            insertCafe(db, "Губерня", "", R.drawable.gubern, R.drawable.gubern_2);
+            insertCafe(db, "Архидея", "ул. Дзержинского,21\nПн–пт: 12:00–16:00, 17:00–02:00\n" +
+                    "Сб, Вс: 12:00–02:00\n(Без выходных)", R.drawable.arhid, R.drawable.arhid_2);
+            insertCafe(db, "Пит стоп", "пр-т Я. Купалы,16-а, ТЦ Корона\nПн–вс: 11:00–23:00\n(Без выходных)", R.drawable.pitstop, R.drawable.pitstop_2);
+            insertCafe(db, "Амстердам", "пр-т Я. Купалы,16-а, ТЦ Корона\nПн–вс: 11:00–23:00\n(Без выходных)", R.drawable.amsterdam, R.drawable.amsterdam_2);
+            insertCafe(db, "Путник", "ул. Красноармейская,5\n Пн-вс: 09:00-18:00\n" +
+                    "(Без выходных)", R.drawable.putnik, R.drawable.nophoto);
+            insertCafe(db, "Караван", "ул. Красноармейская,5\nПн-вс: 12:00-00:00\n(Без выходных)", R.drawable.karavan, R.drawable.nophoto);
+            insertCafe(db, "Старый лямус", "ул. Дзержинского,1-а\nПн–вс: 12:00–02:00\n(Без выходных)", R.drawable.liamus, R.drawable.liamus_2);
+            insertCafe(db, "Go-go Pizza", "ул. К.Маркса,10\nПн–пт: 10:00–23:00\n" +
+                    "Сб: 10:00–00:00 Вс: 10:00–23:00\n(Без выходных)", R.drawable.gogo, R.drawable.gogo_2);
+            insertCafe(db, "Loft House", "ул. Ожешко,24\nПн–чт: 11:00–23:00\n" +
+                    "Пт, Сб: 11:00–02:00\n" +
+                    "Вс: 11:00–00:00\n(Без выходных)", R.drawable.loft, R.drawable.loft_2);
+            insertCafe(db, "Basta Pasta", "ул. Победы,35\nПн–вс: 07:00–23:00\n(Без выходных)", R.drawable.bastapasta, R.drawable.bastapasa_2);
+            insertCafe(db, "Turan", "пр-т Клецкова,15-а\nПн–чт: 12:00–06:00\n" +
+                    "Пт: 16:00–02:00\n" +
+                    "Сб: 14:00–02:00\n" +
+                    "Вс: выходной", R.drawable.turan, R.drawable.turan_2);
+            insertCafe(db, "Гудини", "ул. Телеграфная,12\nпн - вс: 18:00 до 00:00\n(Без выходных)", R.drawable.nophoto, R.drawable.gudini_2);
+            insertCafe(db, "Графит", "ул. Дзержинского,98\nЧт: 17:00–00:00\n" +
+                    "Пт, Сб: 17:00–02:00\n" +
+                    "Вс: 17:00–00:00\nПн, Вт, Ср: выходной", R.drawable.nophoto, R.drawable.nophoto);
+            insertCafe(db, "Трактир", "ул. Кирова,9\nПн–вс: 12:00–23:00\n(Без выходных)", R.drawable.traktir, R.drawable.nophoto);
+            insertCafe(db, "Чайкоффский", "пр-т Космонавтов,6-а\nПн–пт: 08:00–19:00\n" +
+                    "Сб, Вс: 10:00–17:00\n(Без выходных)", R.drawable.chaykoff, R.drawable.chaykoff_2);
+            insertCafe(db, "Хамелеон", "ул. Советская,29\nПн–чт: 12:00–22:00\n" +
+                    "Пт, Сб: 12:00–04:00 Вс: 12:00–22:00\n(Без выходных)", R.drawable.nophoto, R.drawable.nophoto);
+            insertCafe(db, "Жемчужина", "БЛК,19\nВт–вс: 12:00–00:00\n" +
+                    "Пн: выходной)", R.drawable.nophoto, R.drawable.nophoto);
+            insertCafe(db, "Гризли", "ул. Пестрака,7\nПн–чт: 11:00–23:00\n" +
+                    "Пт, Сб: 11:00–02:00 \nВс: 11:00–00:00\n(Без выходных)", R.drawable.grizli, R.drawable.nophoto);
+            insertCafe(db, "Pizza Smile", "пр-т Космонавтов, 81, АЛМИ\nПн–чт: 11:00–23:00\n" +
+                    "Пт, Сб: 11:00–01:00\n" +
+                    "Вс: 11:00–23:00\n(Без выходных)", R.drawable.smile, R.drawable.smile_2);
+            insertCafe(db, "Карчма у причала", "ул.Заводская,14\nПн–пт: 12:00–00:00\n" +
+                    "Сб, Вс: 12:00–02:00\n(Без выходных)", R.drawable.karchmaprichal, R.drawable.karchmaprichal_2);
+            insertCafe(db, "Кофе и пицца", "ул. Кирова,15\nПн–вс: 11:00–02:00\n(Без выходных)", R.drawable.nophoto, R.drawable.nophoto);
+            insertCafe(db, "Просто кафе", "ул. Замковая,18/1\nПн–вс: 10:00–22:00\n(Без выходных)", R.drawable.prosto, R.drawable.prosto_2);
+            insertCafe(db, "Шекспир", "ул. Дзержинского,1/1\nПн–вс: 09:00–23:00\n(Без выходных)", R.drawable.nophoto, R.drawable.shekspir_2);
+            insertCafe(db, "Королевская охота", "ул. Ожешко,3\nПн–вс: 12:00–00:00\n(Без выходных)", R.drawable.ohota, R.drawable.ohota_2);
+            insertCafe(db, "Верас", "Гродно, ул. Горького,72\nПн–вс: 12:00–02:00\n(Без выходных)", R.drawable.veras, R.drawable.veras_2);
+            insertCafe(db, "Белые розы", " ул. Дзержинского,98\nПн–вс: 12:00–02:00\n(Без выходных)", R.drawable.belroz, R.drawable.nophoto);
 
 
 
@@ -395,6 +477,24 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
             insertClub(db,"Клуб \"Пушкин\"","Адрес:Гродно, ул. Советских пограничников, 53.\n" + "Тел:+375152 52-06-29\n" + "чт.: с 17.00 до 05.00, пт. - вс.: с 15.00 до 05.00. Пн., Вт. и Ср. – выходной",
                     53.669961, 23.818997,R.drawable.pushkin);
 
+            db.execSQL("CREATE TABLE PARKING (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "NAME TEXT, "
+                    + "SHORT TEXT, "
+                    + "LATITUDE REAL,"
+                    + "LONGITUDE REAL);");
+
+            insertParking(db,"Домбровского,61а" , "80152416116",53.709016, 23.802651);
+            insertParking(db,"Тавлая,1\n" , "80152767536",53.694679, 23.854556);
+            insertParking(db,"Космонавтов,68","80152755521",53.675337, 23.873854);
+            insertParking(db,"Белуша,45","80152757716",53.671230, 23.855207);
+            insertParking(db,"Клецкова,17","80152542955",53.648088, 23.847475);
+            insertParking(db,"Дзержинского,100","80152412582",53.675337, 23.873854);
+            insertParking(db,"Дзержинского,18","80152437262",53.699116, 23.830973);
+            insertParking(db,"Дзержинского,8а","80152767245",53.697908, 23.837960);
+
+
+
+
 
 
 
@@ -429,6 +529,7 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
 
         db.insertOrThrow("HOTELS", null, sightsValues);
     }
+
     public static void insertTaxi (SQLiteDatabase db, String name,String number,String smnumber,
                                    String contact, int resourceId) {
         ContentValues taxiValues = new ContentValues();
@@ -510,6 +611,18 @@ public class TraveliaDatabaseHelper extends SQLiteOpenHelper {
         clubValues.put("IMAGE_RESOURCE_ID", resourceId);
 
         db.insertOrThrow("CLUBS", null, clubValues);
+    }
+
+    public static void insertParking (SQLiteDatabase db, String name,String short1,
+                                     double lat, double lng) {
+        ContentValues parkingValues = new ContentValues();
+        parkingValues.put("NAME", name);
+        parkingValues.put("LATITUDE", lat);
+        parkingValues.put("LONGITUDE", lng);
+        parkingValues.put("SHORT",short1);
+
+
+        db.insertOrThrow("PARKING", null, parkingValues);
     }
 
     public void changeFavourite(int id, boolean isFavourite) {

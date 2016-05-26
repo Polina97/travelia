@@ -140,7 +140,7 @@ public class CafeActivity extends AppCompatActivity
             SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
             SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query("CAFE",
-                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID"}, "_id = ?",
+                    new String[]{"NAME", "CONTACTS", "IMAGE_RESOURCE_ID2"}, "_id = ?",
                     new String[]{Integer.toString(id)}, null, null, null);
             if (cursor.moveToFirst()) {
                 String name = cursor.getString(0);

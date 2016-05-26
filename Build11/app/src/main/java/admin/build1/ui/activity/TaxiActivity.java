@@ -19,20 +19,16 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import admin.build1.R;
 import admin.build1.database.TraveliaCursorLoader2;
@@ -117,7 +113,6 @@ public class TaxiActivity extends BaseActivity
         } else if (id == R.id.nav_about) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -139,9 +134,13 @@ public class TaxiActivity extends BaseActivity
     }
 
     private void initDrawer() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle(null);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -163,7 +162,7 @@ public class TaxiActivity extends BaseActivity
                 int photoId = cursor.getInt(2);
                 LayoutInflater inflater = getLayoutInflater();
 
-                View layout = inflater.inflate(R.layout.card_cafe,
+                View layout = inflater.inflate(R.layout.card_taxi,
                         (ViewGroup)findViewById(R.id.layout));
                 TextView namehotels = (TextView)layout.findViewById(R.id.text_card1);
                 namehotels.setText(name);

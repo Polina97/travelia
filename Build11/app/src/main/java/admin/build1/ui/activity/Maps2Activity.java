@@ -1,12 +1,14 @@
 package admin.build1.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import admin.build1.Manifest;
 import admin.build1.R;
 import admin.build1.database.TraveliaDatabaseHelper;
 
@@ -49,6 +52,13 @@ public class Maps2Activity extends FragmentActivity implements OnMapReadyCallbac
             int id = b.getInt("id");
 
             try {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                }
+                else {
+                    // Show rationale and request permission.
+                }
                 SQLiteOpenHelper sightsDatabaseHelper = new TraveliaDatabaseHelper(this);
                 SQLiteDatabase db = sightsDatabaseHelper.getReadableDatabase();
                 Cursor cursor = db.query(name,
@@ -61,9 +71,9 @@ public class Maps2Activity extends FragmentActivity implements OnMapReadyCallbac
                     double lng = cursor.getDouble(2);
                     LatLng sydney = new LatLng(lat, lng);
                     mMap.addMarker(new MarkerOptions().position(sydney).title(name1));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16f));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18f));
+                    mMap.setMyLocationEnabled(true);
                 }
-
                 cursor.close();
                 db.close();
 
@@ -72,7 +82,5 @@ public class Maps2Activity extends FragmentActivity implements OnMapReadyCallbac
                 toast.show();
             }
         }
-
-
     }
 }

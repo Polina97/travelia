@@ -21,6 +21,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,7 +56,7 @@ public class HotelsActivity extends AppCompatActivity
 
         initDrawer();
 
-        mRecycler = (RecyclerView) findViewById(R.id.recycler_view1);
+        mRecycler = (RecyclerView) findViewById(R.id.recycler_view);
         mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -138,6 +139,7 @@ public class HotelsActivity extends AppCompatActivity
     private void initDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -171,6 +173,7 @@ public class HotelsActivity extends AppCompatActivity
                 texthotels.setText(text);
                 ImageView imagehotels = (ImageView)layout.findViewById(R.id.image_card);
                 imagehotels.setImageResource(photoId);
+                texthotels.setMovementMethod(LinkMovementMethod.getInstance());
 
                 AlertDialog.Builder builder= new AlertDialog.Builder(this);
                 builder. setView(layout);;

@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import admin.build1.R;
@@ -25,11 +26,18 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
     private final Cursor mCursor;
     private final SightsOnClickListener mListener;
     private final Context mContext;
+    private final boolean mIsFavourite;
 
-    public SightsAdapter(Cursor cursor, Context context, SightsOnClickListener listener) {
+    //в этом массиве будут индексы favourite, чтобы в onBindViewHolder мы знали на какую позицию курсора идти
+    private List<Integer> mFavouriteIndexes;
+
+    public SightsAdapter(Cursor cursor, Context context, boolean isFavourite, SightsOnClickListener listener) {
         mCursor = cursor;
         mContext = context;
         mListener = listener;
+
+        //присваеиваем переменную
+        mIsFavourite = isFavourite;
     }
 
     @Override
@@ -40,7 +48,11 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
 
     @Override
     public void onBindViewHolder(SightsViewHolder holder, int position) {
-        mCursor.moveToPosition(position);
+        //проверяем: если нам нужны только favourite, то берём индекс из заранее подготовленного списка mFavouriteIndexes
+        //иначе просто двигаемся на следующую позицию курсора
+        mCursor.moveToPosition(mIsFavourite ? mFavouriteIndexes.get(position) : position);
+
+        //тут без изменений
         String text = mCursor.getString(mCursor.getColumnIndex("NAME"));
         int imageResId = mCursor.getInt(mCursor.getColumnIndex("IMAGE_RESOURCE_ID"));
         boolean isFavourite = mCursor.getInt(mCursor.getColumnIndex("FAVORITE")) == 1;
@@ -49,7 +61,27 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
 
     @Override
     public int getItemCount() {
-        return mCursor.getCount();
+        //magic happens here
+
+        if (!mIsFavourite) {
+            return mCursor.getCount();
+        } else {
+            mFavouriteIndexes = new ArrayList<>();
+
+            //посомтри в отлаке как идёт обход курсора и всё поймёшь
+            for (int i = 0; i < mCursor.getCount(); i++) {
+
+                mCursor.moveToPosition(i);
+                //TODO CHANGE IS HERE
+                //TODO CHANGE IS HERE
+
+                if (mCursor.getInt(mCursor.getColumnIndex("FAVORITE")) == 1) {
+                    mFavouriteIndexes.add(i);
+                }
+            }
+
+            return mFavouriteIndexes.size();
+        }
     }
 
     class SightsViewHolder extends RecyclerView.ViewHolder {
@@ -81,8 +113,16 @@ public class SightsAdapter extends RecyclerView.Adapter<SightsAdapter.SightsView
         }
 
         private int getId() {
-            mCursor.moveToPosition(getAdapterPosition());
-            return mCursor.getInt(mCursor.getColumnIndex("_id"));
+
+            if (!mIsFavourite) {
+                mCursor.moveToPosition(getAdapterPosition());
+                return  mCursor.getInt(mCursor.getColumnIndex("_id"));
+            }
+            else {
+                mCursor.moveToPosition(mFavouriteIndexes.get(getAdapterPosition()));
+                return  mCursor.getInt(mCursor.getColumnIndex("_id"));
+
+            }
         }
 
         public void populateView(int imageResId, String text, boolean isFavourite) {

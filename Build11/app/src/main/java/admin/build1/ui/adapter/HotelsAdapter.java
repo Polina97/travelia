@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import admin.build1.R;
-import admin.build1.ui.activity.FavoriteDetailActivity;
 
 /**
  * Created by User on 11.05.2016.
@@ -50,6 +49,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
 
         ImageView mImage;
         TextView mText;
+
 
         public HotelsViewHolder(View itemView, final HotelsOnClickListener listener) {
             super(itemView);

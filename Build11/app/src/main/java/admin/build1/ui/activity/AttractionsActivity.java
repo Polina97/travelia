@@ -40,6 +40,8 @@ public class AttractionsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions);
 
+
+
         initDrawer();
 
         mProgress = (ProgressBar)findViewById(android.R.id.progress);
@@ -109,7 +111,10 @@ public class AttractionsActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mRecycler.setAdapter(new SightsAdapter(data, this, this));
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
+        mRecycler.setAdapter(new SightsAdapter(data, this, b.getBoolean("favorite"), this));
         mProgress.setVisibility(View.GONE);
     }
 
@@ -121,6 +126,7 @@ public class AttractionsActivity extends AppCompatActivity
     private void initDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
